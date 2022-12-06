@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const middlewareActions = {
+  initGetGalleries: () => {},
+};
+
 export const galleriesSlice = createSlice({
   name: "galleries",
   initialState: {
@@ -9,9 +13,10 @@ export const galleriesSlice = createSlice({
     setGalleries: (state, action) => {
       state.galleries = action.payload;
     },
+    ...middlewareActions,
   },
 });
 
-export const { setGalleries } = galleriesSlice.actions;
+export const { setGalleries, initGetGalleries } = galleriesSlice.actions;
 
 export default galleriesSlice.reducer;
