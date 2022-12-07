@@ -1,7 +1,7 @@
 import { put, call, takeLatest } from "redux-saga/effects";
 import { authService } from "../../services/AuthService";
 
-import { initLoginUser, login } from "./slice";
+import { initLoginUser, initRegisterUser, login, register } from "./slice";
 
 function* initLoginUserHandler(action) {
   try {
@@ -14,4 +14,17 @@ function* initLoginUserHandler(action) {
 
 export function* watchInitLoginUser() {
   yield takeLatest(initLoginUser.type, initLoginUserHandler);
+}
+
+function* initRegisterUserHandler(action) {
+  try {
+    const response = yield call(authService.register, action.payload);
+    yield put(register(response));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitRegisterUser() {
+  yield takeLatest(initRegisterUser.type, initRegisterUserHandler);
 }
