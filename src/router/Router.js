@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -19,6 +19,9 @@ export default function Router() {
       </Route>
       <Route path="/register">
         <Register />
+      </Route>
+      <Route path="/logout">
+        <Redirect to="/" />
       </Route>
     </Switch>
   );

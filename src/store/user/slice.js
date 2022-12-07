@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const middlewareActions = {
   initLoginUser: () => {},
   initRegisterUser: () => {},
+  initLogoutUser: () => {},
 };
 
 export const usersSlice = createSlice({
@@ -18,11 +19,20 @@ export const usersSlice = createSlice({
     register: (state, action) => {
       state.user = action.payload.user;
     },
+    logout: (state) => {
+      state.user = {};
+    },
     ...middlewareActions,
   },
 });
 
-export const { initLoginUser, initRegisterUser, login, register } =
-  usersSlice.actions;
+export const {
+  initLoginUser,
+  initRegisterUser,
+  initLogoutUser,
+  login,
+  register,
+  logout,
+} = usersSlice.actions;
 
 export default usersSlice.reducer;

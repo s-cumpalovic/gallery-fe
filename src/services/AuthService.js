@@ -3,7 +3,8 @@ import { ApiService } from "./ApiService";
 class AuthService extends ApiService {
   constructor() {
     super();
-    this.setAxiosAuthorizationHeader();
+    const localToken = this.getToken();
+    this.setAxiosAuthorizationHeader(localToken);
   }
 
   setAxiosAuthorizationHeader(tokenParam = null) {
@@ -15,8 +16,7 @@ class AuthService extends ApiService {
 
   getToken = () => {
     let tokenJSON = localStorage.getItem("token");
-    const token = JSON.parse(tokenJSON);
-    return token;
+    return tokenJSON;
   };
 
   login = async (data) => {
@@ -48,6 +48,13 @@ class AuthService extends ApiService {
       }
     } catch (e) {
       console.error(e);
+    }
+  };
+
+  logout = async () => {
+    let response = await this.client.post("/logout");
+    if (response.data) {
+      localStorage.removeItem("token");
     }
   };
 }
