@@ -11,8 +11,8 @@ export default function GalleryComponent({ id, title, description, image }) {
       >
         <h3>{title}</h3>
       </ConditionalWrapper>
-      <img src={image} />
       <p>{description}</p>
+      <img src={image} />
     </div>
   );
 }

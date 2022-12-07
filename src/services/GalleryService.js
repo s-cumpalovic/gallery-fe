@@ -9,6 +9,15 @@ class GalleryService extends ApiService {
       console.error(e);
     }
   };
+
+  getGallery = async (id) => {
+    try {
+      const response = await this.client.get(`/gallery/${id}`);
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
 }
 
 export const galleryService = new GalleryService();
