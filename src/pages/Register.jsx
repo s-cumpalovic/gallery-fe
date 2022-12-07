@@ -9,6 +9,7 @@ import { authService } from "../services/AuthService";
 export default function Login() {
   const dispatch = useDispatch();
 
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
@@ -27,6 +28,8 @@ export default function Login() {
         newUser={newUser}
         setNewUser={setNewUser}
         onSubmitUser={handleOnSubmit}
+        acceptTerms={acceptTerms}
+        setAcceptTerms={setAcceptTerms}
       />
     </div>
   );

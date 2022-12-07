@@ -4,7 +4,7 @@ export default function CarouselComponent({ images }) {
   return (
     <Carousel>
       {images.map((image) => (
-        <Carousel.Item>
+        <Carousel.Item key={image.id}>
           <div
             style={{
               display: "flex",

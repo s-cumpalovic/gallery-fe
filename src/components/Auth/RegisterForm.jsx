@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function RegisterForm({ newUser, setNewUser, onSubmitUser }) {
+export default function RegisterForm({
+  newUser,
+  setNewUser,
+  onSubmitUser,
+  acceptTerms,
+  setAcceptTerms,
+}) {
   return (
     <div>
       <form onSubmit={onSubmitUser}>
@@ -53,7 +59,16 @@ export default function RegisterForm({ newUser, setNewUser, onSubmitUser }) {
             })
           }
         />
-        <button type="submit">Register</button>
+        <label>I agree to the terms and conditions</label>
+        <input
+          type="checkbox"
+          onChange={(e) =>
+            e.target.checked ? setAcceptTerms(true) : setAcceptTerms(false)
+          }
+        />
+        <button disabled={!acceptTerms} type="submit">
+          Register
+        </button>
       </form>
     </div>
   );

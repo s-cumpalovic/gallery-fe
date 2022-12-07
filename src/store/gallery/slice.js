@@ -13,7 +13,7 @@ export const galleriesSlice = createSlice({
   },
   reducers: {
     setGalleries: (state, action) => {
-      state.galleries = action.payload;
+      state.galleries = action.payload.data;
     },
     setSingleGallery: (state, action) => {
       state.singleGallery = action.payload;
