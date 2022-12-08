@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
+import NewGallery from "../pages/NewGallery";
 import Register from "../pages/Register";
 import SingleGallery from "../pages/SingleGallery";
 
@@ -22,6 +23,9 @@ export default function Router() {
       </Route>
       <Route path="/logout">
         <Redirect to="/" />
+      </Route>
+      <Route path="/create">
+        <NewGallery />
       </Route>
     </Switch>
   );

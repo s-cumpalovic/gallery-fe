@@ -28,7 +28,10 @@ export default function HomePage() {
               id={gallery.id}
               title={gallery.title}
               description={gallery.description}
-              image={gallery.images[0].image_url}
+              mainImage={gallery.images[0].image_url}
+              authorName={gallery.user.first_name}
+              authorSurname={gallery.user.last_name}
+              createdAt={gallery.created_at}
             />
           ))
         : "No galleries at this moment"}
