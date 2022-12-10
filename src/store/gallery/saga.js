@@ -4,6 +4,7 @@ import { put, call, takeLatest } from "redux-saga/effects";
 import {
   initGetGalleries,
   initGetSingleGallery,
+  initStoreGallery,
   setGalleries,
   setSingleGallery,
 } from "./slice";
@@ -32,4 +33,16 @@ function* initGetSingleGalleryHandler(action) {
 
 export function* watchInitGetSingleGallery() {
   yield takeLatest(initGetSingleGallery.type, initGetSingleGalleryHandler);
+}
+
+function* initStoreGalleryHandler(action) {
+  try {
+    yield call(galleryService.createGallery, action.payload);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitStoreGallery() {
+  yield takeLatest(initStoreGallery.type, initStoreGalleryHandler);
 }

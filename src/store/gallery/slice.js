@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const middlewareActions = {
   initGetGalleries: () => {},
   initGetSingleGallery: () => {},
+  initStoreGallery: () => {},
 };
 
 export const galleriesSlice = createSlice({
@@ -27,6 +28,7 @@ export const {
   setSingleGallery,
   initGetGalleries,
   initGetSingleGallery,
+  initStoreGallery,
 } = galleriesSlice.actions;
 
 export default galleriesSlice.reducer;

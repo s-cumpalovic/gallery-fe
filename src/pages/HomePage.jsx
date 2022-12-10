@@ -5,7 +5,8 @@ import GalleryComponent from "../components/Gallery/GalleryComponent";
 // Redux imports
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllGalleries } from "../store/gallery/selectors";
-import { initGetGalleries } from "../store/gallery/slice";
+import { initGetGalleries, initRefreshToken } from "../store/gallery/slice";
+import { authService } from "../services/AuthService";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export default function HomePage() {
   const handleGetGalleries = async () => {
     await dispatch(initGetGalleries());
   };
+
 
   return (
     <div>

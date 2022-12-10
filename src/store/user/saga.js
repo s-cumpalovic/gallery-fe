@@ -5,8 +5,10 @@ import {
   initLoginUser,
   initLogoutUser,
   initRegisterUser,
+  initRefreshToken,
   login,
   register,
+  refresh,
 } from "./slice";
 
 function* initLoginUserHandler(action) {
@@ -45,4 +47,17 @@ function* initLogoutUserHandler() {
 
 export function* watchInitLogoutUser() {
   yield takeLatest(initLogoutUser.type, initLogoutUserHandler);
+}
+
+function* initRefreshTokenHandler() {
+  try {
+    const response = yield call(authService.refresh);
+    yield put(refresh(response));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitRefreshToken() {
+  yield takeLatest(initRefreshToken.type, initRefreshTokenHandler);
 }

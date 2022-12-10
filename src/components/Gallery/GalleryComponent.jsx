@@ -51,7 +51,11 @@ export default function GalleryComponent({
               {comments
                 ? comments.map((comment) => (
                     <ul key={comment.id}>
-                      <li>{comment.body}</li>
+                      <li>
+                        <h5>Author: {comment.user.first_name}</h5>
+                        <p>Created: {comment.created_at}</p>
+                        <p>{comment.body}</p>
+                      </li>
                     </ul>
                   ))
                 : "This gallery has no comments"}

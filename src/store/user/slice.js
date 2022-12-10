@@ -4,6 +4,7 @@ const middlewareActions = {
   initLoginUser: () => {},
   initRegisterUser: () => {},
   initLogoutUser: () => {},
+  initRefreshToken: () => {},
 };
 
 export const usersSlice = createSlice({
@@ -22,6 +23,9 @@ export const usersSlice = createSlice({
     logout: (state) => {
       state.user = {};
     },
+    refresh: (state, action) => {
+      state.user = action.payload;
+    },
     ...middlewareActions,
   },
 });
@@ -30,9 +34,11 @@ export const {
   initLoginUser,
   initRegisterUser,
   initLogoutUser,
+  initRefreshToken,
   login,
   register,
   logout,
+  refresh,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;

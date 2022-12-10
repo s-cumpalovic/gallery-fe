@@ -3,7 +3,7 @@ import { ApiService } from "./ApiService";
 class GalleryService extends ApiService {
   getAllGalleries = async () => {
     try {
-      const response = await this.client.get("/gallery");
+      let response = await this.client.get("/gallery");
       return response.data;
     } catch (e) {
       console.error(e);
@@ -12,7 +12,19 @@ class GalleryService extends ApiService {
 
   getGallery = async (id) => {
     try {
-      const response = await this.client.get(`/gallery/${id}`);
+      let response = await this.client.get(`/gallery/${id}`);
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  createGallery = async (newGallery) => {
+    try {
+      let response = await this.client.post("/gallery", {
+        ...newGallery,
+        user_id: newGallery.userId,
+      });
       return response.data;
     } catch (e) {
       console.error(e);

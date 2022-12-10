@@ -4,42 +4,49 @@ export default function CreateGalleryComponent({
   newGallery,
   setNewGallery,
   image,
-  setNewImage,
+  setImage,
   onSubmitGallery,
 }) {
+  const handleImages = () => {
+    setNewGallery({
+      ...newGallery,
+      images: [...newGallery.images, image],
+    });
+  };
+
   return (
-    <form onSubmit={onSubmitGallery}>
-      <input
-        placeholder="Title.."
-        type="text"
-        value={newGallery.title}
-        onChange={({ target }) =>
-          setNewGallery({
-            ...newGallery,
-            title: target.value,
-          })
-        }
-      />
-      <textarea
-        palceholder="Description"
-        value={newGallery.description}
-        onChange={({ target }) =>
-          setNewGallery({
-            ...newGallery,
-            description: target.value,
-          })
-        }
-      />
-      <input
-        placeholder="Add pictures.."
-        value={newGallery.images}
-        type="text"
-        onChange={({ target }) =>
-          setNewGallery({
-          })
-        }
-      />
-      <button type="submit">Login</button>
-    </form>
+    <>
+      <form onSubmit={onSubmitGallery}>
+        <input
+          placeholder="Title.."
+          type="text"
+          value={newGallery.title}
+          onChange={({ target }) =>
+            setNewGallery({
+              ...newGallery,
+              title: target.value,
+            })
+          }
+        />
+        <textarea
+          palceholder="Description"
+          value={newGallery.description}
+          onChange={({ target }) =>
+            setNewGallery({
+              ...newGallery,
+              description: target.value,
+            })
+          }
+        />
+        <input
+          placeholder="Add pictures.."
+          type="url"
+          value={image.url}
+          onChange={({ target }) => setImage({ url: target.value })}
+        />
+        <button type="submit">Create gallery</button>
+      </form>
+      <button onClick={handleImages}>Add image</button>
+    </>
   );
 }
