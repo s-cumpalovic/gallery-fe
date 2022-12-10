@@ -21,9 +21,6 @@ export const usersSlice = createSlice({
     register: (state, action) => {
       state.user = action.payload.user;
     },
-    logout: (state) => {
-      state.user = {};
-    },
     refresh: (state, action) => {
       state.user = action.payload;
     },

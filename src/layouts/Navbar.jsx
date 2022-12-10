@@ -1,9 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectIsAuth } from "../store/user/selectors";
+import { initLogoutUser } from "../store/user/slice";
+
 export default function Navbar() {
   const isAuth = useSelector(selectIsAuth);
+  const dispatch = useDispatch();
+
+  const handleLogOut = async () => {
+    await dispatch(initLogoutUser());
+  };
 
   return (
     <div>
@@ -29,7 +36,9 @@ export default function Navbar() {
               <Link to="/create">Create new gallery</Link>
             </li>
             <li className="nav-item">
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout" onClick={handleLogOut}>
+                Logout
+              </Link>
             </li>
           </>
         )}

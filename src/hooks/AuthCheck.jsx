@@ -14,7 +14,7 @@ export default function useAuth() {
     const token = localStorage.getItem("token");
     if (token) {
       await dispatch(initRefreshToken());
-      dispatch(setIsAuth(true))
+      await dispatch(setIsAuth(true))
     }
   };
   return <div></div>;

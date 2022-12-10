@@ -25,6 +25,7 @@ class AuthService extends ApiService {
       if (response.data) {
         localStorage.setItem("token", response.data.authorisation.token);
         this.setAxiosAuthorizationHeader(response.data.authorisation.token);
+        window.location.reload();
         return response.data;
       }
     } catch (e) {
@@ -54,6 +55,7 @@ class AuthService extends ApiService {
   logout = async () => {
     let response = await this.client.post("/logout");
     if (response.data) {
+      window.location.reload();
       localStorage.removeItem("token");
     }
   };
