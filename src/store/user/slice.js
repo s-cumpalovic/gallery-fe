@@ -11,6 +11,7 @@ export const usersSlice = createSlice({
   name: "users",
   initialState: {
     user: {},
+    isAuth: false,
   },
 
   reducers: {
@@ -26,6 +27,9 @@ export const usersSlice = createSlice({
     refresh: (state, action) => {
       state.user = action.payload;
     },
+    setIsAuth: (state, action) => {
+      state.isAuth = action.payload;
+    },
     ...middlewareActions,
   },
 });
@@ -39,6 +43,7 @@ export const {
   register,
   logout,
   refresh,
+  setIsAuth,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;

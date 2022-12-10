@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { initRefreshToken } from "../store/user/slice";
+import { initRefreshToken, setIsAuth } from "../store/user/slice";
 
 export default function useAuth() {
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function useAuth() {
     const token = localStorage.getItem("token");
     if (token) {
       await dispatch(initRefreshToken());
+      dispatch(setIsAuth(true))
     }
   };
   return <div></div>;
