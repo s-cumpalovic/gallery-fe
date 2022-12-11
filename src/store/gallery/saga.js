@@ -9,9 +9,9 @@ import {
   setSingleGallery,
 } from "./slice";
 
-function* initGetGalleriesHandler() {
+function* initGetGalleriesHandler(action) {
   try {
-    const response = yield call(galleryService.getAllGalleries);
+    const response = yield call(galleryService.getAllGalleries, action.payload);
     yield put(setGalleries(response));
   } catch (e) {
     console.error(e);
