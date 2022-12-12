@@ -8,8 +8,7 @@ export default function GalleryComponent({
   title,
   description,
   mainImage,
-  authorName,
-  authorSurname,
+  author,
   createdAt,
   images,
   comments,
@@ -29,7 +28,10 @@ export default function GalleryComponent({
           <h3>{title}</h3>
         </ConditionalWrapper>
         <p>
-          Author: {authorName} {authorSurname}{" "}
+          Author:{" "}
+          <Link to={`/authors/${author.id}`}>
+            {author.first_name} {author.last_name}{" "}
+          </Link>
         </p>
         <p>Created at: {createdAt}</p>
         <p>Description: {description}</p>

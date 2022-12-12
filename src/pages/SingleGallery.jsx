@@ -6,8 +6,7 @@ import GalleryComponent from "../components/Gallery/GalleryComponent";
 // Redux imports
 import { useDispatch, useSelector } from "react-redux";
 import { selectSingleGallery } from "../store/gallery/selectors";
-import { galleriesSlice, initGetSingleGallery } from "../store/gallery/slice";
-import CarouselComponent from "../components/Gallery/Carousel";
+import { initGetSingleGallery } from "../store/gallery/slice";
 
 export default function SingleGallery() {
   const { id } = useParams();
@@ -23,23 +22,18 @@ export default function SingleGallery() {
   };
   return (
     <div>
-      {gallery &&
-        gallery.user &&
-        gallery.comments &&
-        gallery.images && (
-          <GalleryComponent
-            key={gallery.id}
-            title={gallery.title}
-            description={gallery.description}
-            authorName={gallery.user.first_name}
-            authorSurname={gallery.user.last_name}
-            createdAt={gallery.created_at}
-            comments={gallery.comments}
-            displayComments={true}
-            images={gallery.images}
-          />
-        )}
-      {/* {gallery.images && <CarouselComponent images={gallery.images} />} */}
+      {gallery && gallery.user && gallery.comments && gallery.images && (
+        <GalleryComponent
+          key={gallery.id}
+          title={gallery.title}
+          description={gallery.description}
+          author={gallery.user}
+          createdAt={gallery.created_at}
+          comments={gallery.comments}
+          displayComments={true}
+          images={gallery.images}
+        />
+      )}
     </div>
   );
 }

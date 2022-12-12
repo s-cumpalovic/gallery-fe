@@ -2,23 +2,39 @@
 import React, { useEffect, useState } from "react";
 import GalleryComponent from "../components/Gallery/GalleryComponent";
 import SearchBar from "../components/Gallery/SearchBar";
+import { useParams } from "react-router-dom";
 
 // Redux imports
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllGalleries } from "../store/gallery/selectors";
 import { initGetGalleries } from "../store/gallery/slice";
+import { selectUser } from "../store/user/selectors";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const galleries = useSelector(selectAllGalleries);
-  const [term, setTerm] = useState("");
+
+  const { id } = useParams();
+  const [term, setTerm] = useState();
+
+  /* Data for my-galleries route */
+  const myGalleriesHref = "http://localhost:3000/my-galleries";
+  const user = useSelector(selectUser);
+  let selfId = "";
+  if (user.user) {
+    selfId = user.user.id;
+  }
 
   useEffect(() => {
-    handleGetGalleries(term);
-  }, [term]);
+    handleGetGalleries();
+  }, [term, id, selfId]);
 
-  const handleGetGalleries = async (term) => {
-    await dispatch(initGetGalleries(term));
+  const handleGetGalleries = async () => {
+    if (window.location.href == myGalleriesHref) {
+      await dispatch(initGetGalleries({ term: term, id: selfId }));
+    } else {
+      await dispatch(initGetGalleries({ term: term, id: id }));
+    }
   };
 
   return (
@@ -32,8 +48,7 @@ export default function HomePage() {
             title={gallery.title}
             description={gallery.description}
             mainImage={gallery.images[0].image_url}
-            authorName={gallery.user.first_name}
-            authorSurname={gallery.user.last_name}
+            author={gallery.user}
             createdAt={gallery.created_at}
           />
         ))

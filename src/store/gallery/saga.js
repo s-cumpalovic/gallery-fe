@@ -11,7 +11,11 @@ import {
 
 function* initGetGalleriesHandler(action) {
   try {
-    const response = yield call(galleryService.getAllGalleries, action.payload);
+    const response = yield call(
+      galleryService.getAllGalleries,
+      action.payload?.term,
+      action.payload?.id
+    );
     yield put(setGalleries(response));
   } catch (e) {
     console.error(e);

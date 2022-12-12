@@ -13,21 +13,18 @@ export default function Router() {
 
   const AuthRoute = ({ children, ...rest }) => {
     return (
-      <Route {...rest}>
-        {isAuth ? children : <Redirect to="/login" />}
-      </Route>
+      <Route {...rest}>{isAuth ? children : <Redirect to="/login" />}</Route>
     );
   };
   const GuestRoute = ({ children, ...rest }) => {
-    return (
-      <Route {...rest}>
-        {!isAuth ? children : <Redirect to="/" />}
-      </Route>
-    );
+    return <Route {...rest}>{!isAuth ? children : <Redirect to="/" />}</Route>;
   };
   return (
     <Switch>
       <Route exact path="/">
+        <HomePage />
+      </Route>
+      <Route exact path="/authors/:id">
         <HomePage />
       </Route>
       <Route exact path="/galleries/:id">
@@ -44,6 +41,9 @@ export default function Router() {
       </AuthRoute>
       <AuthRoute path="/create" exact>
         <NewGallery />
+      </AuthRoute>
+      <AuthRoute path="/my-galleries" exact>
+        <HomePage />
       </AuthRoute>
     </Switch>
   );

@@ -1,9 +1,11 @@
 import { ApiService } from "./ApiService";
 
 class GalleryService extends ApiService {
-  getAllGalleries = async (term = "") => {
+  getAllGalleries = async (term = "", id = "") => {
     try {
-      let response = await this.client.get(`/gallery?term=${term}`);
+      let response = await this.client.get(
+        `/gallery?term=${term}&userId=${id}`
+      );
       return response.data;
     } catch (e) {
       console.error(e);
