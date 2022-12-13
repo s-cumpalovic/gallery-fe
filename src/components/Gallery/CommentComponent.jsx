@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { initDeleteComment } from "../../store/gallery/slice";
 import { selectUser } from "../../store/user/selectors";
 import DeleteButton from "../Buttons/DeleteButton";
-import { ConditionalWrapper } from "../Wrappers/ConditionalWrapper";
+import { format } from "date-fns";
 export default function CommentComponent({
   newComment,
   setNewComment,
@@ -42,7 +41,7 @@ export default function CommentComponent({
                     <h5>
                       {comment.user.first_name} {comment.user.last_name}
                     </h5>
-                    <p>Created: {comment.created_at}</p>
+                    <p>Created: {format(new Date(comment.created_at), "dd-MM-yyyy HH:mm")}</p>
                     <p>{comment.body}</p>
                   </li>
                 </ul>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useFormattedDate from "../../hooks/useFormattedDate";
 import { ConditionalWrapper } from "../Wrappers/ConditionalWrapper";
 import CarouselComponent from "./Carousel";
 
@@ -11,9 +12,8 @@ export default function GalleryComponent({
   author,
   createdAt,
   images,
-  comments,
-  displayComments,
 }) {
+  const formattedDate = useFormattedDate(createdAt, "dd-MM-yyyy HH:mm");
   return (
     <>
       {/* Gallery properties */}
@@ -30,10 +30,11 @@ export default function GalleryComponent({
         <p className="gallery-author">
           Author:
           <Link to={`/authors/${author.id}`}>
-            {author.first_name}{author.last_name}
+            {author.first_name}
+            {author.last_name}
           </Link>
         </p>
-        <p className="gallery-date">Created at: {createdAt}</p>
+        <p className="gallery-date">Created at: {formattedDate}</p>
         <p className="gallery-description">Description: {description}</p>
         {mainImage ? <img className="gallery-image" src={mainImage} /> : ""}
       </div>
