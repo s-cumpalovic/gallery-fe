@@ -43,14 +43,15 @@ export default function SingleGallery() {
   // Data for rendering DELETE & EDIT buttons
   let loggedUserId = "";
   let galleryUserId = "";
-  let usersMatch = false;
+
+  let galleryUsersMatch = false;
 
   if (userData && userData.user && gallery.user) {
     loggedUserId = userData.user.id;
     galleryUserId = gallery.user.id;
 
     if (loggedUserId === galleryUserId) {
-      usersMatch = true;
+      galleryUsersMatch = true;
     }
   }
 
@@ -69,14 +70,14 @@ export default function SingleGallery() {
 
     await dispatch(initAddComment(newComment));
     history.push(`/galleries/${id}`);
-    window.location.reload() // Znam da je prelose ali trka s vremenom..
+    window.location.reload(); // Znam da je prelose ali trka s vremenom..
   };
   return (
     <div>
       {gallery && gallery.user && gallery.comments && gallery.images && (
         <>
           <ConditionalWrapper
-            condition={usersMatch}
+            condition={galleryUsersMatch}
             wrapper={() => (
               <div className="gallery-buttons">
                 <button className="btn btn-warning">
@@ -98,13 +99,13 @@ export default function SingleGallery() {
             createdAt={gallery.created_at}
             images={gallery.images}
           />
-          <CommentComponent
-            newComment={newComment}
-            setNewComment={setNewComment}
-            comments={gallery.comments}
-            loggedUserId={loggedUserId}
-            onHandleComments={handleOnSubmitComment}
-          />
+            <CommentComponent
+              newComment={newComment}
+              setNewComment={setNewComment}
+              comments={gallery.comments}
+              loggedUserId={loggedUserId}
+              onHandleComments={handleOnSubmitComment}
+            />
         </>
       )}
     </div>

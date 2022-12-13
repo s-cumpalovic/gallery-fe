@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { initDeleteComment } from "../../store/gallery/slice";
+import { selectUser } from "../../store/user/selectors";
+import DeleteButton from "../Buttons/DeleteButton";
+import { ConditionalWrapper } from "../Wrappers/ConditionalWrapper";
 export default function CommentComponent({
   newComment,
   setNewComment,
@@ -8,21 +12,41 @@ export default function CommentComponent({
   comments,
   onHandleComments,
 }) {
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUser);
+
+  let commentUserId = "";
+  let commentUsersMatch = false;
+  const handleOnDeleteButton = async (commentId) => {
+    await dispatch(initDeleteComment(commentId));
+    alert("Comment deleted");
+    window.location.reload();
+  };
+
   return (
     <div>
       <h1>Comments</h1>
       <div className="gallery-comments">
         {comments
           ? comments.map((comment) => (
-              <ul key={comment.id}>
-                <li>
-                  <h5>
-                    {comment.user.first_name} {comment.user.last_name}
-                  </h5>
-                  <p>Created: {comment.created_at}</p>
-                  <p>{comment.body}</p>
-                </li>
-              </ul>
+              <>
+                {userData.user && userData.user.id === comment.user_id ? (
+                  <DeleteButton
+                    onClickDeleteButton={() => handleOnDeleteButton(comment.id)}
+                  />
+                ) : (
+                  ""
+                )}
+                <ul key={comment.id}>
+                  <li>
+                    <h5>
+                      {comment.user.first_name} {comment.user.last_name}
+                    </h5>
+                    <p>Created: {comment.created_at}</p>
+                    <p>{comment.body}</p>
+                  </li>
+                </ul>
+              </>
             ))
           : "This gallery has no comments"}
       </div>

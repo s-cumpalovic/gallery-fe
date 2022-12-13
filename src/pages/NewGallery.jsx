@@ -55,7 +55,6 @@ export default function NewGallery() {
   };
 
   useEffect(() => {
-    console.log(newGallery);
   }, [newGallery]);
 
   const handleEditGallery = async (e) => {

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAllGalleries } from "../store/gallery/selectors";
 import { initGetGalleries } from "../store/gallery/slice";
 import { selectUser } from "../store/user/selectors";
+import { galleryService } from "../services/GalleryService";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function HomePage() {
 
   const { id } = useParams();
   const [term, setTerm] = useState();
+  const [page, setPage] = useState(1);
 
   /* Data for my-galleries route */
   const myGalleriesHref = "http://localhost:3000/my-galleries";
@@ -27,13 +29,14 @@ export default function HomePage() {
 
   useEffect(() => {
     handleGetGalleries();
-  }, [term, id, selfId]);
+    console.log(page);
+  }, [term, id, selfId, page]);
 
   const handleGetGalleries = async () => {
     if (window.location.href == myGalleriesHref) {
-      await dispatch(initGetGalleries({ term: term, id: selfId }));
+      await dispatch(initGetGalleries({ page: page, term: term, id: selfId }));
     } else {
-      await dispatch(initGetGalleries({ term: term, id: id }));
+      await dispatch(initGetGalleries({ page: page, term: term, id: id }));
     }
   };
 
@@ -55,6 +58,20 @@ export default function HomePage() {
       ) : (
         <h3>No galleries at this moment"</h3>
       )}
+      <div className="pagination-buttons">
+        <button
+          className="btn btn-primary"
+          onClick={() => setPage((prevPage) => prevPage - 1)}
+        >
+          Prev page
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => setPage((prevPage) => prevPage + 1)}
+        >
+          Next page
+        </button>
+      </div>
     </div>
   );
 }

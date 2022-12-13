@@ -1,10 +1,10 @@
 import { ApiService } from "./ApiService";
 
 class GalleryService extends ApiService {
-  getAllGalleries = async (term = "", id = "") => {
+  getAllGalleries = async (current_page = 1, term = "", id = "") => {
     try {
       let response = await this.client.get(
-        `/gallery?term=${term}&userId=${id}`
+        `/gallery?term=${term}&userId=${id}&current_page=${current_page}`
       );
       return response.data;
     } catch (e) {
@@ -61,6 +61,15 @@ class GalleryService extends ApiService {
         gallery_id: newComment.galleryId,
         ...newComment,
       });
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  deleteComment = async (id) => {
+    try {
+      let response = await this.client.delete(`/comments/${id}`);
       return response.data;
     } catch (e) {
       console.error(e);

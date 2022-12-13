@@ -27,17 +27,11 @@ body{
 
 .gallery-title:hover{
     background-color: var(--dark-blue);
-    color: var(--white);
+    color: var(--green);
 }
 
-
-.gallery-author {
-}
-
-.gallery-description{
-}
-
-.gallery-date {
+.gallery-title, .gallery-author a:link, a:visited {
+    color: var(--dark-blue);
 }
 
 .gallery-image {
@@ -141,4 +135,11 @@ body{
 .added-images {
     margin-left: 10px;
     padding: 2rem;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    margin: 3rem;
 }

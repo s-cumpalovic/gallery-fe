@@ -30,7 +30,7 @@ export default function GalleryComponent({
         <p className="gallery-author">
           Author:
           <Link to={`/authors/${author.id}`}>
-            {author.first_name}-{author.last_name}
+            {author.first_name}{author.last_name}
           </Link>
         </p>
         <p className="gallery-date">Created at: {createdAt}</p>

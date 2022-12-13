@@ -8,6 +8,7 @@ import {
   initEditGallery,
   initDeleteGallery,
   initAddComment,
+  initDeleteComment,
   setGalleries,
   setSingleGallery,
 } from "./slice";
@@ -16,6 +17,7 @@ function* initGetGalleriesHandler(action) {
   try {
     const response = yield call(
       galleryService.getAllGalleries,
+      action.payload?.page,
       action.payload?.term,
       action.payload?.id
     );
@@ -55,7 +57,6 @@ export function* watchInitStoreGallery() {
 }
 
 function* initEditGalleryHandler(action) {
-  console.log(action.payload);
   try {
     yield call(
       galleryService.updateGallery,
@@ -94,3 +95,16 @@ function* initAddCommentHandler(action) {
 export function* watchInitAddComment() {
   yield takeLatest(initAddComment.type, initAddCommentHandler);
 }
+
+function* initDeleteCommentHandler(action) {
+  try {
+    yield call(galleryService.deleteComment, action.payload);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitDeleteComment() {
+  yield takeLatest(initDeleteComment.type, initDeleteCommentHandler);
+}
+
