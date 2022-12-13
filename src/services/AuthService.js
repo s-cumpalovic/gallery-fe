@@ -45,6 +45,7 @@ class AuthService extends ApiService {
         localStorage.removeItem("token");
         localStorage.setItem("token", response.data.authorisation.token);
         this.setAxiosAuthorizationHeader(response.data.authorisation.token);
+        window.location.reload();
         return response.data;
       }
     } catch (e) {

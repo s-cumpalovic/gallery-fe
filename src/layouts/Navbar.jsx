@@ -13,7 +13,7 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className="navbar">
       <ul className="nav-list">
         <li className="nav-item">
           <Link to="/">All galleries</Link>

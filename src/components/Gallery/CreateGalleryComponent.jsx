@@ -16,7 +16,7 @@ export default function CreateGalleryComponent({
 
   return (
     <>
-      <form onSubmit={onSubmitGallery}>
+      <form className="form-component" onSubmit={onSubmitGallery}>
         <input
           placeholder="Title.."
           type="text"
@@ -41,12 +41,16 @@ export default function CreateGalleryComponent({
         <input
           placeholder="Add pictures.."
           type="url"
-          value={image.url}
-          onChange={({ target }) => setImage({ url: target.value })}
+          value={image}
+          onChange={({ target }) => setImage(target.value)}
         />
-        <button type="submit">Create gallery</button>
+        <button className="btn btn-primary" type="submit">
+          Create gallery
+        </button>
+        <button className="btn btn-warning" onClick={handleImages}>
+          Add image
+        </button>
       </form>
-      <button onClick={handleImages}>Add image</button>
     </>
   );
 }

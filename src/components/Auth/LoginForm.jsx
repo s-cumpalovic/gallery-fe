@@ -3,7 +3,7 @@ import React from "react";
 export default function LoginForm({ newUser, setNewUser, onSubmitUser }) {
   return (
     <div>
-      <form onSubmit={onSubmitUser}>
+      <form className="form-component" onSubmit={onSubmitUser}>
         <input
           placeholder="Email.."
           type="email"
@@ -26,7 +26,7 @@ export default function LoginForm({ newUser, setNewUser, onSubmitUser }) {
             })
           }
         />
-        <button type="submit">Login</button>
+        <button className="btn btn-primary"type="submit">Login</button>
       </form>
     </div>
   );

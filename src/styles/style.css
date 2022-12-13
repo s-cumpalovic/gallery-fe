@@ -1,0 +1,128 @@
+:root {
+    --dark-blue: #181D31;
+    --green: #678983;
+    --dirty-white: #E6DDC4;
+    --white: #F0E9D2;
+
+}
+
+body{
+}
+/* Gallery component */
+
+.gallery-component{
+    display: inline-block;
+    text-align: justify;
+    padding: 5rem;
+    width: 50%;
+}
+
+.gallery-title, .gallery-author{
+    width: 20%;
+    padding: 1rem;
+    font-style: italic;
+    color: var(--dark-blue);
+
+}
+
+.gallery-title:hover{
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+
+.gallery-author {
+}
+
+.gallery-description{
+}
+
+.gallery-date {
+}
+
+.gallery-image {
+    width: 800px;
+    height: 600px
+}
+
+/* Navbar */
+
+.navbar{
+    overflow: hidden;
+    background-color: var(--dark-blue);
+}
+
+.nav-item {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 2rem;
+    text-decoration: none;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item a:visited, a:link {
+    font-size: 18px;
+    padding: 3rem;
+    width: 50px;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.nav-item a:hover{
+    background-color: var(--white);
+    color: var(--dark-blue);
+}
+
+.search-bar input {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    margin-left: 30%;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: 40%;
+    color: var(--dark-blue);
+}
+
+.form-component {
+    margin: 5% 20%;
+}
+
+.form-component input[type=text],
+ input[type=password],
+  input[type=email],
+   input[type=url] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+}
+
+.form-component input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.form-component input[type=checkbox]:hover {
+    cursor: pointer;
+}
+
+.form-component textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+  }

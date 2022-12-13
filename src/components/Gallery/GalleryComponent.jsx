@@ -18,24 +18,24 @@ export default function GalleryComponent({
     <>
       {/* Gallery properties */}
 
-      <div>
+      <div className="gallery-component">
         <ConditionalWrapper
           condition={id}
           wrapper={(children) => (
             <Link to={`/galleries/${id}`}>{children}</Link>
           )}
         >
-          <h3>{title}</h3>
+          <h2 className="gallery-title">{title}</h2>
         </ConditionalWrapper>
-        <p>
-          Author:{" "}
+        <p className="gallery-author">
+          Author:
           <Link to={`/authors/${author.id}`}>
-            {author.first_name} {author.last_name}{" "}
+            {author.first_name}-{author.last_name}
           </Link>
         </p>
-        <p>Created at: {createdAt}</p>
-        <p>Description: {description}</p>
-        <img src={mainImage} />
+        <p className="gallery-date">Created at: {createdAt}</p>
+        <p className="gallery-description">Description: {description}</p>
+        <img className="gallery-image" src={mainImage} />
       </div>
 
       {/* Images carousel */}

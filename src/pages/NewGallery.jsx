@@ -6,9 +6,7 @@ import { initStoreGallery } from "../store/gallery/slice";
 import { selectUser } from "../store/user/selectors";
 
 export default function NewGallery() {
-  const [image, setImage] = useState({
-    url: "",
-  });
+  const [image, setImage] = useState("");
   const [newGallery, setNewGallery] = useState({
     userId: "",
     title: "",
@@ -31,6 +29,7 @@ export default function NewGallery() {
 
   const handleOnSubmitGallery = async (e) => {
     e.preventDefault();
+
     await dispatch(initStoreGallery(newGallery));
   };
 
@@ -46,7 +45,7 @@ export default function NewGallery() {
       {newGallery.images && <h6>Images:</h6> &&
         newGallery.images.map((image) => (
           <div>
-            <p key={image.id}>{image.url}</p>
+            <p>{image}</p>
           </div>
         ))}
     </div>

@@ -9,7 +9,7 @@ export default function RegisterForm({
 }) {
   return (
     <div>
-      <form onSubmit={onSubmitUser}>
+      <form className="form-component" onSubmit={onSubmitUser}>
         <input
           placeholder="First Name.."
           type="text"
@@ -66,7 +66,7 @@ export default function RegisterForm({
             e.target.checked ? setAcceptTerms(true) : setAcceptTerms(false)
           }
         />
-        <button disabled={!acceptTerms} type="submit">
+        <button disabled={!acceptTerms} className="btn btn-primary" type="submit">
           Register
         </button>
       </form>
