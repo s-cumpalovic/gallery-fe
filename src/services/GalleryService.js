@@ -53,6 +53,19 @@ class GalleryService extends ApiService {
       console.error(e);
     }
   };
+
+  addComment = async (newComment) => {
+    try {
+      let response = await this.client.post("/gallery", {
+        user_id: newComment.userId,
+        gallery_id: newComment.galleryId,
+        ...newComment,
+      });
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
 }
 
 export const galleryService = new GalleryService();

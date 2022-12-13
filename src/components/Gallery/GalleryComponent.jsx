@@ -41,30 +41,6 @@ export default function GalleryComponent({
       {/* Images carousel */}
 
       {images ? <CarouselComponent images={images}></CarouselComponent> : ""}
-
-      {/* Comments display */}
-
-      <ConditionalWrapper
-        condition={displayComments}
-        wrapper={() => (
-          <div>
-            <h1>Comments</h1>
-            <div>
-              {comments
-                ? comments.map((comment) => (
-                    <ul key={comment.id}>
-                      <li>
-                        <h5>Author: {comment.user.first_name}</h5>
-                        <p>Created: {comment.created_at}</p>
-                        <p>{comment.body}</p>
-                      </li>
-                    </ul>
-                  ))
-                : "This gallery has no comments"}
-            </div>
-          </div>
-        )}
-      ></ConditionalWrapper>
     </>
   );
 }

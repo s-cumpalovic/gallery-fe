@@ -5,10 +5,11 @@ import {
   initGetGalleries,
   initGetSingleGallery,
   initStoreGallery,
+  initEditGallery,
   initDeleteGallery,
+  initAddComment,
   setGalleries,
   setSingleGallery,
-  initEditGallery,
 } from "./slice";
 
 function* initGetGalleriesHandler(action) {
@@ -80,4 +81,16 @@ function* initDeleteGalleryHandler(action) {
 
 export function* watchInitDeleteGallery() {
   yield takeLatest(initDeleteGallery.type, initDeleteGalleryHandler);
+}
+
+function* initAddCommentHandler(action) {
+  try {
+    yield call(galleryService.addComment, action.payload);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitAddComment() {
+  yield takeLatest(initAddComment.type, initAddCommentHandler);
 }
