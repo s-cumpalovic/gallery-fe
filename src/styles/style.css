@@ -45,6 +45,17 @@ body{
     height: 600px
 }
 
+.gallery-buttons {
+    display: flex;
+    margin-top: 3rem;
+    margin-left: 5rem
+}
+
+.gallery-buttons button {
+    width: 200px;
+    padding: 1rem;
+    margin: 1rem;
+}
 /* Navbar */
 
 .navbar{
@@ -125,4 +136,9 @@ body{
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;
-  }
+}
+
+.added-images {
+    margin-left: 10px;
+    padding: 2rem;
+}

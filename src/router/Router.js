@@ -45,6 +45,9 @@ export default function Router() {
       <AuthRoute path="/my-galleries" exact>
         <HomePage />
       </AuthRoute>
+      <AuthRoute path="/edit-gallery/:id" exact>
+        <NewGallery />
+      </AuthRoute>
     </Switch>
   );
 }

@@ -24,9 +24,30 @@ class GalleryService extends ApiService {
   createGallery = async (newGallery) => {
     try {
       let response = await this.client.post("/gallery", {
-        ...newGallery,
         user_id: newGallery.userId,
+        ...newGallery,
       });
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  updateGallery = async (id, editGallery) => {
+    try {
+      let response = await this.client.put(`/gallery/${id}`, {
+        ...editGallery,
+        user_id: editGallery.userId,
+      });
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  deleteGallery = async (id) => {
+    try {
+      let response = await this.client.delete(`/gallery/${id}`);
       return response.data;
     } catch (e) {
       console.error(e);

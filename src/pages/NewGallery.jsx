@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import CreateGalleryComponent from "../components/Gallery/CreateGalleryComponent";
-import { galleryService } from "../services/GalleryService";
-import { initStoreGallery } from "../store/gallery/slice";
+import { selectSingleGallery } from "../store/gallery/selectors";
+import {
+  initStoreGallery,
+  initGetSingleGallery,
+  initEditGallery,
+} from "../store/gallery/slice";
 import { selectUser } from "../store/user/selectors";
 
 export default function NewGallery() {
+  const userData = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const { id } = useParams();
+  const history = useHistory();
+
   const [image, setImage] = useState("");
   const [newGallery, setNewGallery] = useState({
     userId: "",
     title: "",
     description: "",
-    images: "",
+    images: [],
   });
-
-  const userData = useSelector(selectUser);
 
   useEffect(() => {
     if (userData.user) {
@@ -22,15 +31,39 @@ export default function NewGallery() {
         ...newGallery,
         userId: userData.user.id,
       });
+      handleGetSingleGallery();
     }
   }, [userData]);
-
-  const dispatch = useDispatch();
 
   const handleOnSubmitGallery = async (e) => {
     e.preventDefault();
 
     await dispatch(initStoreGallery(newGallery));
+    history.push("/my-galleries");
+  };
+
+  const singleGallery = useSelector(selectSingleGallery);
+
+  const handleGetSingleGallery = async () => {
+    await dispatch(initGetSingleGallery(id));
+    setNewGallery({
+      userId: userData.user.id,
+      title: singleGallery.title,
+      description: singleGallery.description,
+      images: singleGallery.images.map((imageData) => imageData.image_url),
+    });
+  };
+
+  useEffect(() => {
+    console.log(newGallery);
+  }, [newGallery]);
+
+  const handleEditGallery = async (e) => {
+    e.preventDefault();
+
+    await dispatch(initEditGallery({ id: id, newGallery: newGallery }));
+    alert("Gallery edited succesfully!");
+    history.push(`/galleries/${id}`);
   };
 
   return (
@@ -39,15 +72,19 @@ export default function NewGallery() {
         newGallery={newGallery}
         setNewGallery={setNewGallery}
         onSubmitGallery={handleOnSubmitGallery}
+        onEditGallery={handleEditGallery}
         image={image}
         setImage={setImage}
       />
-      {newGallery.images && <h6>Images:</h6> &&
-        newGallery.images.map((image) => (
-          <div>
-            <p>{image}</p>
-          </div>
-        ))}
+      <div className="added-images">
+        <h3>Images:</h3>
+        {newGallery.images &&
+          newGallery.images.map((image) => (
+            <div key={image.index}>
+              <p>{image}</p>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 export default function CreateGalleryComponent({
   newGallery,
@@ -6,17 +7,21 @@ export default function CreateGalleryComponent({
   image,
   setImage,
   onSubmitGallery,
+  onEditGallery,
 }) {
+  const { id } = useParams();
+
   const handleImages = () => {
     setNewGallery({
       ...newGallery,
       images: [...newGallery.images, image],
     });
+    setImage("");
   };
 
   return (
     <>
-      <form className="form-component" onSubmit={onSubmitGallery}>
+      <form className="form-component" onSubmit={!id ? onSubmitGallery : onEditGallery}>
         <input
           placeholder="Title.."
           type="text"
@@ -45,12 +50,12 @@ export default function CreateGalleryComponent({
           onChange={({ target }) => setImage(target.value)}
         />
         <button className="btn btn-primary" type="submit">
-          Create gallery
-        </button>
-        <button className="btn btn-warning" onClick={handleImages}>
-          Add image
+          {!id ? 'Create gallery' : 'Edit gallery'}
         </button>
       </form>
+      <button className="btn btn-warning" onClick={handleImages}>
+        Add image
+      </button>
     </>
   );
 }

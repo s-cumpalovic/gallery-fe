@@ -4,6 +4,8 @@ const middlewareActions = {
   initGetGalleries: () => {},
   initGetSingleGallery: () => {},
   initStoreGallery: () => {},
+  initEditGallery: () => {},
+  initDeleteGallery: () => {},
 };
 
 export const galleriesSlice = createSlice({
@@ -29,6 +31,8 @@ export const {
   initGetGalleries,
   initGetSingleGallery,
   initStoreGallery,
+  initEditGallery,
+  initDeleteGallery,
 } = galleriesSlice.actions;
 
 export default galleriesSlice.reducer;

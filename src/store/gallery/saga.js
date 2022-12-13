@@ -1,12 +1,14 @@
 import { galleryService } from "../../services/GalleryService";
 
-import { put, call, takeLatest } from "redux-saga/effects";
+import { put, call, takeLatest, takeEvery } from "redux-saga/effects";
 import {
   initGetGalleries,
   initGetSingleGallery,
   initStoreGallery,
+  initDeleteGallery,
   setGalleries,
   setSingleGallery,
+  initEditGallery,
 } from "./slice";
 
 function* initGetGalleriesHandler(action) {
@@ -49,4 +51,33 @@ function* initStoreGalleryHandler(action) {
 
 export function* watchInitStoreGallery() {
   yield takeLatest(initStoreGallery.type, initStoreGalleryHandler);
+}
+
+function* initEditGalleryHandler(action) {
+  console.log(action.payload);
+  try {
+    yield call(
+      galleryService.updateGallery,
+      action.payload?.id,
+      action.payload?.newGallery
+    );
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitEditGallery() {
+  yield takeEvery(initEditGallery.type, initEditGalleryHandler);
+}
+
+function* initDeleteGalleryHandler(action) {
+  try {
+    yield call(galleryService.deleteGallery, action.payload);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchInitDeleteGallery() {
+  yield takeLatest(initDeleteGallery.type, initDeleteGalleryHandler);
 }

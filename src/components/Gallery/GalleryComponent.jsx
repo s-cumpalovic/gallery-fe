@@ -35,7 +35,7 @@ export default function GalleryComponent({
         </p>
         <p className="gallery-date">Created at: {createdAt}</p>
         <p className="gallery-description">Description: {description}</p>
-        <img className="gallery-image" src={mainImage} />
+        {mainImage ? <img className="gallery-image" src={mainImage} /> : ""}
       </div>
 
       {/* Images carousel */}
